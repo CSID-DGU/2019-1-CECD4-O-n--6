@@ -55,7 +55,8 @@ def detect(save_txt=False, save_img=False):
         dataset = LoadImages(source, img_size=img_size, half=half)
 
     # Get classes and colors
-    classes = load_classes(parse_data_cfg(opt.data)['names'])
+    #classes = load_classes(parse_data_cfg(opt.data)['names'])
+    classes = load_classes('/home/johnc/Desktop/2019-1-CECD4-O-n--6/yolov3/data/coco.names')
     colors = [[random.randint(0, 255) for _ in range(3)] for _ in range(len(classes))]
 
     # Run inference
@@ -130,12 +131,13 @@ def detect(save_txt=False, save_img=False):
 
 
 if __name__ == '__main__':
+    yolov3_dir ='/home/johnc/Desktop/2019-1-CECD4-O-n--6/yolov3/'
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cfg', type=str, default='cfg/yolov3-spp.cfg', help='cfg file path')
-    parser.add_argument('--data', type=str, default='data/coco.data', help='coco.data file path')
-    parser.add_argument('--weights', type=str, default='weights/yolov3-spp.weights', help='path to weights file')
-    parser.add_argument('--source', type=str, default='data/samples', help='source')  # input file/folder, 0 for webcam
-    parser.add_argument('--output', type=str, default='output', help='output folder')  # output folder
+    parser.add_argument('--cfg', type=str, default=yolov3_dir+'cfg/yolov3.cfg', help='cfg file path')
+    parser.add_argument('--data', type=str, default=yolov3_dir+'data/coco.data', help='coco.data file path')
+    parser.add_argument('--weights', type=str, default=yolov3_dir+'weights/yolov3.weights', help='path to weights file')
+    parser.add_argument('--source', type=str, default=yolov3_dir+'data/samples', help='source')  # input file/folder, 0 for webcam
+    parser.add_argument('--output', type=str, default=yolov3_dir+'output', help='output folder')  # output folder
     parser.add_argument('--img-size', type=int, default=416, help='inference size (pixels)')
     parser.add_argument('--conf-thres', type=float, default=0.3, help='object confidence threshold')
     parser.add_argument('--nms-thres', type=float, default=0.5, help='iou threshold for non-maximum suppression')
