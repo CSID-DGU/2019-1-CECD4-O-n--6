@@ -56,7 +56,7 @@ def detect(save_txt=False, save_img=False):
 
     # Get classes and colors
     #classes = load_classes(parse_data_cfg(opt.data)['names'])
-    classes = load_classes('/home/johnc/Desktop/2019-1-CECD4-O-n--6/yolov3/data/coco.names')
+    classes = load_classes('C:\\Users\\johnc\\Documents\\2019-1-CECD4-O-n--6\\yolov3\\data\\coco.names')
     colors = [[random.randint(0, 255) for _ in range(3)] for _ in range(len(classes))]
 
     # Run inference
@@ -78,20 +78,29 @@ def detect(save_txt=False, save_img=False):
                 p, s, im0 = path[i], '%g: ' % i, im0s[i]
             else:
                 p, s, im0 = path, '', im0s
-
+            
             save_path = str(Path(out) / Path(p).name)
+            
+            
+            
+            ###################### Code by JuhunC#########################
+            f= open(save_path+'.txt','w+')
+
+
             s += '%gx%g ' % img.shape[2:]  # print string
             if det is not None and len(det):
                 # Rescale boxes from img_size to im0 size
+               
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
-
                 # Print results
                 for c in det[:, -1].unique():
                     n = (det[:, -1] == c).sum()  # detections per class
                     s += '%g %ss, ' % (n, classes[int(c)])  # add to string
-
                 # Write results
                 for *xyxy, conf, _, cls in det:
+                    ###################WRITE COORDINATE TO FILE ########################
+                    f.write('%s '% classes[int(cls)])
+                    f.write(('%g ' * 5 + '\n') % (*xyxy , conf))
                     if save_txt:  # Write to file
                         with open(save_path + '.txt', 'a') as file:
                             file.write(('%g ' * 6 + '\n') % (*xyxy, cls, conf))
@@ -101,7 +110,7 @@ def detect(save_txt=False, save_img=False):
                         plot_one_box(xyxy, im0, label=label, color=colors[int(cls)])
 
             print('%sDone. (%.3fs)' % (s, time.time() - t))
-
+            f.close()
             # Stream results
             if view_img:
                 cv2.imshow(p, im0)
@@ -131,7 +140,8 @@ def detect(save_txt=False, save_img=False):
 
 
 if __name__ == '__main__':
-    yolov3_dir ='/home/johnc/Desktop/2019-1-CECD4-O-n--6/yolov3/'
+    yolov3_dir = 'C:\\Users\\johnc\\Documents\\2019-1-CECD4-O-n--6\\yolov3'
+    #yolov3_dir ='/home/johnc/Desktop/2019-1-CECD4-O-n--6/yolov3/'
     parser = argparse.ArgumentParser()
     parser.add_argument('--cfg', type=str, default=yolov3_dir+'cfg/yolov3.cfg', help='cfg file path')
     parser.add_argument('--data', type=str, default=yolov3_dir+'data/coco.data', help='coco.data file path')
