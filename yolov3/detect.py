@@ -13,9 +13,9 @@ def detect(save_txt=False, save_img=False):
 
     # Initialize
     device = torch_utils.select_device(device='cpu' if ONNX_EXPORT else opt.device)
-    if os.path.exists(out):
-        shutil.rmtree(out)  # delete output folder
-    os.makedirs(out)  # make new output folder
+    # if os.path.exists(out):
+    #     shutil.rmtree(out)  # delete output folder
+    # os.makedirs(out)  # make new output folder
 
     # Initialize model
     model = Darknet(opt.cfg, img_size)
@@ -79,12 +79,12 @@ def detect(save_txt=False, save_img=False):
             else:
                 p, s, im0 = path, '', im0s
             
-            save_path = str(Path(out) / Path(p).name)
-            
+            #save_path = str(Path(out) / Path(p).name)
+            save_path = out+'.jpg'
             
             
             ###################### Code by JuhunC#########################
-            f= open(save_path+'.txt','w+')
+            f= open(out+'.txt','w+')
 
 
             s += '%gx%g ' % img.shape[2:]  # print string
@@ -102,7 +102,7 @@ def detect(save_txt=False, save_img=False):
                     f.write('%s '% classes[int(cls)])
                     f.write(('%g ' * 5 + '\n') % (*xyxy , conf))
                     if save_txt:  # Write to file
-                        with open(save_path + '.txt', 'a') as file:
+                        with open(str(Path(out+'.txt')/Path(p).name), 'a') as file:
                             file.write(('%g ' * 6 + '\n') % (*xyxy, cls, conf))
 
                     if save_img or view_img:  # Add bbox to image
@@ -119,6 +119,7 @@ def detect(save_txt=False, save_img=False):
             if save_img:
                 if dataset.mode == 'images':
                     cv2.imwrite(save_path, im0)
+                    print(save_path)
                 else:
                     if vid_path != save_path:  # new video
                         vid_path = save_path
