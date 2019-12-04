@@ -42,4 +42,8 @@ pip3 install -U -r requirements.txt
 
 These are the pictures of using Android Application.
 
-![image_png](https://github.com/CSID-DGU/2019-1-CECD4-O-n--6/tree/master/usage_images/1.png)
+![image_png](https://github.com/CSID-DGU/2019-1-CECD4-O-n--6/blob/master/usage_images/1.png?raw=true)
+![image_png](https://github.com/CSID-DGU/2019-1-CECD4-O-n--6/blob/master/usage_images/2.png?raw=true)
+![image_png](https://github.com/CSID-DGU/2019-1-CECD4-O-n--6/blob/master/usage_images/3.png?raw=true)
+![image_png](https://github.com/CSID-DGU/2019-1-CECD4-O-n--6/blob/master/usage_images/4.png?raw=true)
+![image_png](https://github.com/CSID-DGU/2019-1-CECD4-O-n--6/blob/master/usage_images/5.png?raw=true)
