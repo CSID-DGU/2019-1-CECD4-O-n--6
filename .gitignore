@@ -1,2 +1,4 @@
 yolov3/weights/
 /yolov3/data/
+/generative_inpainting/model_logs/*
+/coco/images/
